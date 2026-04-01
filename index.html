@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Shop Floor Rotator</title>
+    <title>Internal Shop Floor Rotator</title>
     <style>
         body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: black; }
         iframe { width: 100%; height: 100%; border: none; }
@@ -12,28 +12,27 @@
     <iframe id="dashboard-frame" src="" allowFullScreen="true"></iframe>
 
     <script>
-        /**
-         * NOTE: I am using "reportEmbed" instead of "view" here. 
-         * This is the "Magic Trick" that usually bypasses the 'Refused to Connect' error.
-         **/
-        const baseUrl = "https://app.powerbi.com/reportEmbed?r=eyJrIjoiNmQ5Y2M5ZTktNWJiYi00ZDY2LThhYmUtMjc2YTE5YzIyNmUzIiwidCI6ImE4NzFmZGNhLTIyYWYtNGRkZC1iOTAyLWYzODEwNDFkZWFhMyJ9";
+        // Use the link you provided as the base
+        const baseUrl = "https://app.powerbi.com/reportEmbed?reportId=91e9d1c1-8674-4c55-bd71-ddf88410fa53&autoAuth=true&ctid=a871fdca-22af-4ddd-b902-f381041deaa3";
 
+        // Add your specific PageNames to the end of the base URL
+        // Replace 'ReportSection1' and 'ReportSection2' with what you find in your browser bar
         const urls = [
-            baseUrl + "&pageName=a7d9f8cc2060d02ce20a", // Your first plot
-            baseUrl + "&pageName=197fc9e8fa42206b93df"  // Your second plot
+            baseUrl + "&pageName=a7d9f8cc2060d02ce20a", 
+            baseUrl + "&pageName=197fc9e8fa42206b93df"
         ];
 
         let currentIndex = 0;
         const frame = document.getElementById('dashboard-frame');
 
         function rotate() {
-            console.log("Switching to: " + urls[currentIndex]);
+            console.log("Loading Page: " + (currentIndex + 1));
             frame.src = urls[currentIndex];
             currentIndex = (currentIndex + 1) % urls.length;
         }
 
-        rotate(); // Load first page immediately
-        setInterval(rotate, 120000); // Swap every 120 seconds
+        rotate(); // Load first page
+        setInterval(rotate, 120000); // 2 minute rotation
     </script>
 </body>
 </html>
