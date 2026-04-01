@@ -12,25 +12,25 @@
     <iframe id="dashboard-frame" src="" allowFullScreen="true"></iframe>
 
     <script>
+        // These are your INTERNAL links with 'chromeless' to help the old Fire Stick
         const urls = [
             "https://app.powerbi.com/reportEmbed?reportId=91e9d1c1-8674-4c55-bd71-ddf88410fa53&autoAuth=true&ctid=a871fdca-22af-4ddd-b902-f381041deaa3&pageName=a7d9f8cc2060d02ce20a&chromeless=1",
             "https://app.powerbi.com/reportEmbed?reportId=91e9d1c1-8674-4c55-bd71-ddf88410fa53&autoAuth=true&ctid=a871fdca-22af-4ddd-b902-f381041deaa3&pageName=197fc9e8fa42206b93df&chromeless=1"
         ];
 
-        // 1. This checks the URL to see if it should load plot 0 or plot 1
+        // 1. Check the URL for the index (?idx=0 or ?idx=1)
         const urlParams = new URLSearchParams(window.location.search);
         let index = parseInt(urlParams.get('idx')) || 0;
 
         // 2. Set the frame to the current plot
         document.getElementById('dashboard-frame').src = urls[index];
 
-        // 3. THE MAGIC: Instead of just changing the iframe, we RELOAD the whole page.
-        // This clears 'stuck' logos and forces a fresh authentication handshake.
+        // 3. THE ROTATOR: After 2 mins, refresh to the CORRECT new URL
         setTimeout(() => {
             let nextIndex = (index + 1) % urls.length;
-            // This sends the browser back to your GitHub page with the next index
+            // UPDATED URL BELOW
             window.location.href = `https://deidratuxen-ops.github.io/my-dashboards/?idx=${nextIndex}`;
-        }, 120000); // 120000 = 2 minutes
+        }, 120000); 
     </script>
 </body>
 </html>
