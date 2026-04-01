@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Internal Shop Floor Rotator</title>
+    <title>Public Shop Floor Rotator</title>
     <style>
         body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: black; }
         iframe { width: 100%; height: 100%; border: none; }
@@ -12,11 +12,9 @@
     <iframe id="dashboard-frame" src="" allowFullScreen="true"></iframe>
 
     <script>
-        // Use the link you provided as the base
-        const baseUrl = "https://app.powerbi.com/reportEmbed?reportId=91e9d1c1-8674-4c55-bd71-ddf88410fa53&autoAuth=true&ctid=a871fdca-22af-4ddd-b902-f381041deaa3";
+        // We use 'reportEmbed' instead of 'view' to bypass security/loading hangs
+        const baseUrl = "https://app.powerbi.com/reportEmbed?r=eyJrIjoiNmQ5Y2M5ZTktNWJiYi00ZDY2LThhYmUtMjc2YTE5YzIyNmUzIiwidCI6ImE4NzFmZGNhLTIyYWYtNGRkZC1iOTAyLWYzODEwNDFkZWFhMyJ9";
 
-        // Add your specific PageNames to the end of the base URL
-        // Replace 'ReportSection1' and 'ReportSection2' with what you find in your browser bar
         const urls = [
             baseUrl + "&pageName=a7d9f8cc2060d02ce20a", 
             baseUrl + "&pageName=197fc9e8fa42206b93df"
@@ -26,13 +24,16 @@
         const frame = document.getElementById('dashboard-frame');
 
         function rotate() {
-            console.log("Loading Page: " + (currentIndex + 1));
-            frame.src = urls[currentIndex];
-            currentIndex = (currentIndex + 1) % urls.length;
+            // This 'src = ""' trick forces the browser to clear its memory before loading
+            frame.src = ""; 
+            setTimeout(() => {
+                frame.src = urls[currentIndex];
+                currentIndex = (currentIndex + 1) % urls.length;
+            }, 100);
         }
 
-        rotate(); // Load first page
-        setInterval(rotate, 120000); // 2 minute rotation
+        rotate();
+        setInterval(rotate, 120000); // 2 minutes
     </script>
 </body>
 </html>
