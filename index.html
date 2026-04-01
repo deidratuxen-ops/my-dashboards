@@ -2,41 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop Floor Dashboard Rotator</title>
+    <title>Shop Floor Rotator</title>
     <style>
         body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: black; }
         iframe { width: 100%; height: 100%; border: none; }
     </style>
 </head>
 <body>
-
-    <iframe id="dashboard-frame" src=""></iframe>
+    <iframe id="dashboard-frame" src="" allowFullScreen="true"></iframe>
 
     <script>
-        // PASTE YOUR POWER BI "PUBLISH TO WEB" LINKS HERE
+        /**
+         * NOTE: I am using "reportEmbed" instead of "view" here. 
+         * This is the "Magic Trick" that usually bypasses the 'Refused to Connect' error.
+         **/
+        const baseUrl = "https://app.powerbi.com/reportEmbed?r=eyJrIjoiNmQ5Y2M5ZTktNWJiYi00ZDY2LThhYmUtMjc2YTE5YzIyNmUzIiwidCI6ImE4NzFmZGNhLTIyYWYtNGRkZC1iOTAyLWYzODEwNDFkZWFhMyJ9";
+
         const urls = [
-            "https://app.powerbi.com/groups/9356ed47-a422-455a-b7f7-5266d12c06dc/reports/91e9d1c1-8674-4c55-bd71-ddf88410fa53/a7d9f8cc2060d02ce20a?experience=power-bipageName=a7d9f8cc2060d02ce20a",
-            "https://app.powerbi.com/groups/9356ed47-a422-455a-b7f7-5266d12c06dc/reports/91e9d1c1-8674-4c55-bd71-ddf88410fa53/197fc9e8fa42206b93df?experience=power-bi&pageName197fc9e8fa42206b93df"
+            baseUrl + "&pageName=a7d9f8cc2060d02ce20a", // Your first plot
+            baseUrl + "&pageName=197fc9e8fa42206b93df"  // Your second plot
         ];
 
         let currentIndex = 0;
-        const displayTime = 45000; // 45 seconds in milliseconds
         const frame = document.getElementById('dashboard-frame');
 
-        function rotateDashboard() {
-            // Update the iframe source
+        function rotate() {
+            console.log("Switching to: " + urls[currentIndex]);
             frame.src = urls[currentIndex];
-
-            // Move to next index or loop back to start
             currentIndex = (currentIndex + 1) % urls.length;
         }
 
-        // Initial trigger
-        rotateDashboard();
-
-        // Set the timer to rotate
-        setInterval(rotateDashboard, displayTime);
+        rotate(); // Load first page immediately
+        setInterval(rotate, 45000); // Swap every 45 seconds
     </script>
 </body>
 </html>
