@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ops Dashboard Rotation</title>
+    <title>Operations Dashboard</title>
     <style>
         body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: #000; }
         iframe { width: 100%; height: 100%; border: none; }
@@ -13,31 +13,33 @@
 
     <script>
         const urls = [
-            // 1. Plot 1 (Verified Working)
+            // 1. Plot 1 (Worked Yesterday)
             "https://app.powerbi.com/reportEmbed?reportId=91e9d1c1-8674-4c55-bd71-ddf88410fa53&autoAuth=true&ctid=a871fdca-22af-4ddd-b902-f381041deaa3&pageName=a7d9f8cc2060d02ce20a&chromeless=1",
-    
-            // 2. Plot 2 (Verified Working)
+            
+            // 2. Plot 2 (Worked Yesterday)
             "https://app.powerbi.com/reportEmbed?reportId=91e9d1c1-8674-4c55-bd71-ddf88410fa53&autoAuth=true&ctid=a871fdca-22af-4ddd-b902-f381041deaa3&pageName=197fc9e8fa42206b93df&chromeless=1",
-    
-            // 3. New Report Plot (Using Yesterday's Structure)
+            
+            // 3. Month-over-Month (New - Structured like Yesterday's)
             "https://app.powerbi.com/reportEmbed?reportId=91e9d1c1-8674-4c55-bd71-ddf88410fa53&autoAuth=true&ctid=a871fdca-22af-4ddd-b902-f381041deaa3&pageName=576b82990e1d95c0e65a&chromeless=1",
-    
-            // 4. Pareto Plot (Using Yesterday's Structure)
+            
+            // 4. Pareto Plot (New - Structured like Yesterday's)
             "https://app.powerbi.com/reportEmbed?reportId=91e9d1c1-8674-4c55-bd71-ddf88410fa53&autoAuth=true&ctid=a871fdca-22af-4ddd-b902-f381041deaa3&pageName=a8110331731c0517677e&chromeless=1",
-    
-             // 5. Month-over-Month (Note: This is the only one that stays in the "view?r=" format)
-            "https://app.powerbi.com/view?r=eyJrIjoiNmQ5Y2M5ZTktNWJiYi00ZDY2LThhYmUtMjc2YTE5YzIyNmUzIiwidCI6ImE4NzFmZGNhLTIyYWYtNGRkZC1iOTAyLWYzODEwNDFkZWFhMyJ9"
-];
+
+            // 5. General Report Plot (New - Structured like Yesterday's)
+            "https://app.powerbi.com/reportEmbed?reportId=91e9d1c1-8674-4c55-bd71-ddf88410fa53&autoAuth=true&ctid=a871fdca-22af-4ddd-b902-f381041deaa3&pageName=576b82990e1d95c0e65a&chromeless=1"
+        ];
+
         const urlParams = new URLSearchParams(window.location.search);
         let index = parseInt(urlParams.get('idx')) || 0;
 
+        // Display the plot
         document.getElementById('content').innerHTML = `<iframe src="${urls[index]}" allowFullScreen="true"></iframe>`;
 
-        // Flips every 120 seconds (2 minutes)
+        // Switch every 120 seconds (2 minutes)
         setTimeout(() => {
             let nextIndex = (index + 1) % urls.length;
             window.location.href = `https://deidratuxen-ops.github.io/my-dashboards/?idx=${nextIndex}`;
-        }, 10000);
+        }, 120000);
     </script>
 </body>
 </html>
