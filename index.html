@@ -13,16 +13,21 @@
 
     <script>
         const urls = [
-        // Plot 1
+            // 1. Plot 1 (Verified Working)
             "https://app.powerbi.com/reportEmbed?reportId=91e9d1c1-8674-4c55-bd71-ddf88410fa53&autoAuth=true&ctid=a871fdca-22af-4ddd-b902-f381041deaa3&pageName=a7d9f8cc2060d02ce20a&chromeless=1",
-        // Plot 2
+    
+            // 2. Plot 2 (Verified Working)
             "https://app.powerbi.com/reportEmbed?reportId=91e9d1c1-8674-4c55-bd71-ddf88410fa53&autoAuth=true&ctid=a871fdca-22af-4ddd-b902-f381041deaa3&pageName=197fc9e8fa42206b93df&chromeless=1",
-        // Plot 3 (Month-over-Month)
+    
+            // 3. New Report Plot (Using Yesterday's Structure)
             "https://app.powerbi.com/reportEmbed?reportId=91e9d1c1-8674-4c55-bd71-ddf88410fa53&autoAuth=true&ctid=a871fdca-22af-4ddd-b902-f381041deaa3&pageName=576b82990e1d95c0e65a&chromeless=1",
-        // Plot 5 (The Report URL you sent)
-            "https://app.powerbi.com/reportEmbed?reportId=91e9d1c1-8674-4c55-bd71-ddf88410fa53&autoAuth=true&ctid=a871fdca-22af-4ddd-b902-f381041deaa3&pageName=a8110331731c0517677e&chromeless=1"
-    ];
-
+    
+            // 4. Pareto Plot (Using Yesterday's Structure)
+            "https://app.powerbi.com/reportEmbed?reportId=91e9d1c1-8674-4c55-bd71-ddf88410fa53&autoAuth=true&ctid=a871fdca-22af-4ddd-b902-f381041deaa3&pageName=a8110331731c0517677e&chromeless=1",
+    
+             // 5. Month-over-Month (Note: This is the only one that stays in the "view?r=" format)
+            "https://app.powerbi.com/view?r=eyJrIjoiNmQ5Y2M5ZTktNWJiYi00ZDY2LThhYmUtMjc2YTE5YzIyNmUzIiwidCI6ImE4NzFmZGNhLTIyYWYtNGRkZC1iOTAyLWYzODEwNDFkZWFhMyJ9"
+];
         const urlParams = new URLSearchParams(window.location.search);
         let index = parseInt(urlParams.get('idx')) || 0;
 
